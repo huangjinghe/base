@@ -1,0 +1,58 @@
+{include file="public/admin-top" /}
+
+<div class="container mt-4" >
+
+    <table class="table table-bordered">
+        <tr>
+            <th colspan="2">系统变量</th>
+        </tr>
+        <tr>
+            <td>模块地址：</td>
+            <td>__URL__ </td>
+        </tr>
+
+        <tr>
+            <td>PHP版本：</td>
+            <td>{$php_version}</td>
+        </tr>
+
+        <tr>
+            <td>Thinkphp版本：</td>
+            <td>{$tp_version}</td>
+        </tr>
+
+        <tr>
+            <td>Apache版本：</td>
+            <td>{$Apache_version}</td>
+        </tr>
+
+        <tr >
+            <th colspan="2">数据统计</th>
+        </tr>
+
+        <tr>
+            <td>自有基站数：</td>
+            <td> {$base_num}</td>
+        </tr>
+        <tr>
+            <td>自有基站隐患解决率：</td>
+            <td>{$fix_rate}</td>
+        </tr>
+
+        <tr>
+            <td>管理员数：</td>
+            <td>{$admin_num}</td>
+        </tr>
+
+        <tr>
+            <td>普通用户数：</td>
+            <td>{$normal_num}</td>
+        </tr>
+
+
+
+    </table>
+
+</div>
+
+{include file="public/admin-bottom" /}

@@ -1,0 +1,89 @@
+{include file="public/admin-top" /}
+<div class="text-right">
+    <button class="btn btn-info btn-group-sm">增加</button>
+    <button class="btn btn-danger btn-group-sm">删除</button>
+    <button class="btn btn-primary btn-group-sm">修改</button>
+</div>
+
+<table id="table">
+</table>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#table').bootstrapTable('destroy');
+        $("#table").bootstrapTable({
+            method: "get",
+            url: "{:url('index/admin/baselist_send')}",
+            search:true,
+            striped: true,  //表格显示条纹，默认为false
+            pagination: true, // 在表格底部显示分页组件，默认false
+            pageList: [10, 20], // 设置页面可以显示的数据条数
+            pageSize: 10, // 页面数据条数
+            pageNumber: 1, // 首页页码
+            sidePagination: 'client', // 设置为服务器端分页
+            showRefresh:false,
+            height:500,
+            queryParams: function (params) { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
+
+                return {
+                    limit: params.limit, // 每页要显示的数据条数
+                    offset: params.offset, // 每页显示数据的开始行号
+                }
+            },
+            columns: [
+                {
+                    checkbox: true, // 显示一个勾选框
+                    align: 'center' // 居中显示
+                }, {
+                    field: 'tp_id', // 返回json数据中的name
+                    title: '站点编号', // 表格表头显示文字
+                    align: 'left', // 左右居中
+                    valign: 'middle' // 上下居中
+                }, {
+                    field: 'tp_basename',
+                    title: '站点名称',
+                    align: 'left',
+                    valign: 'middle'
+                }, {
+                    field: 'tp_basetype',
+                    title: '站点类型',
+                    align: 'left',
+                    valign: 'middle'
+                }, {
+                    field: 'tp_company',
+                    title: '维护单位',
+                    align: 'left',
+                    valign: 'middle'
+                }, {
+                    field: 'tp_id', // 返回json数据中的name
+                    title: '操作', // 表格表头显示文字
+                    align: 'left', // 左右居中
+                    valign: 'middle', // 上下居中
+                    formatter:function (value, row, index) {
+                        var edit="<a class='btn btn-primary' data-toggle=\"modal\" data-target=\"#modal\">修改</a>\t";
+                        var del="<a class='btn btn-danger' onclick='return confirm(\"是否确认删除此站点？\")' href=\"{:url('/index/admin/base_del')}?tp_id="+value+"\">删除</a>\t";
+                        return (del+edit);
+                    }
+                }
+            ],
+            onLoadSuccess: function(){  //加载成功时执行
+                console.info("加载成功");
+            },
+            onLoadError: function(){  //加载失败时执行
+                console.info("加载数据失败");
+            }
+
+
+        });
+        function detailFormatter(index, row) {
+            var html = [];
+            $.each(row, function (key, value) {
+                html.push('<p><b>' + key + ':</b> ' + value + '</p>')
+            });
+            return html.join('');
+        }
+    })
+</script>
+
+{include file="public/admin-bottom" /}

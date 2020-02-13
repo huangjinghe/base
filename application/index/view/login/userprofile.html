@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>佛山基站信息上报系统-用户信息修改</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="__STATIC__/fontawesome-5.5/css/all.min.css" />
+    <link rel="stylesheet" href="__STATIC__/slick/slick.css">
+    <link rel="stylesheet" href="__STATIC__/slick/slick-theme.css">
+    <link rel="stylesheet" href="__STATIC__/magnific-popup/magnific-popup.css">
+    <link rel="stylesheet" href="__STATIC__/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__STATIC__/css/templatemo-style.css" />
+    <script src="__STATIC__/js/jquery-1.9.1.min.js"></script>
+    <script src="__STATIC__/slick/slick.min.js"></script>
+    <script src="__STATIC__/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="__STATIC__/js/jquery.singlePageNav.min.js"></script>
+    <script src="__STATIC__/js/bootstrap.min.js"></script>
+    <script src="__STATIC__/js/function.js"></script>
+
+</head>
+<body>
+<div class="container" >
+    <div class="row ">
+        <div class="col-lg-4" id="alert"></div>
+        <div class="col-sm-12 col-lg-4 mt-3 mr-auto ">
+            <h3>用户信息修改</h3></br>
+            <div class="col-12 text-right">
+                <span style="text-align: right">(*)为必填项</span>
+            </div>
+            <form role="form" class="form-inline mt-3" method="post" id="userprofile">
+                {foreach userinfo as $vo}
+
+                <div class="form-group">
+                    <span class="col-12">姓名：</span>
+                    <input  type="text" class="form-control" value="{$vo.username_zh}" name="username_zh" readonly >
+                </div>
+
+                <div class="form-group">
+                    <span class="col-12">用户名：</span>
+                    <input type="text" class="form-control" name="username" value="{$vo.username}" readonly>
+                </div>
+                <div class="form-group">
+                    <span class="col-12">手机号码：(*)</span>
+                    <input type="phone" class="form-control" name="phone" value="{$vo.phone}">
+                </div>
+
+                <div class="form-group">
+                    <span class="col-12">邮箱：(*)</span>
+                    <input type="email" class="form-control" name="email" value="{$vo.email}">
+                </div>
+                <div class="form-group">
+                    <span class="col-12">所属单位：(*)</span>
+                    <select class="col-12 custom-select " name="danwei">
+                        <option selected>请选择...</option>
+                        <option>无优中心</option>
+                        <option>润建</option>
+                        <option>长实</option>
+                        <option>浙通服</option>
+                        <option>铁通-高铁</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <button id="submit" type="submit" class="btn btn-secondary" >提交修改</button>
+                    <button type="reset" class="btn btn-secondary">重置</button>
+                </div>
+                {/foreach}
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+</html>
+
+<script type="text/javascript">
+    $('#submit').click(function () {
+        var formData = $("#userprofile").serialize();
+        console.log(formData);
+        $.ajax({
+            method: "post",
+            dataType: "json",
+            url: "{:url('index/login/user_save')}",
+            data: formData,//这里data传递过去的是序列化以后的字符串
+            success: function (data) {
+                alert('修改成功,返回');
+                window.location.href="{:url('index/index/index')}";
+            },
+            error:function (error) {
+                alert('修改失败')
+            }
+        })
+
+
+    })
+</script>

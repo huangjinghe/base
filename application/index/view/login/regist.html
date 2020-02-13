@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>佛山基站信息上报系统-用户注册</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="__STATIC__/fontawesome-5.5/css/all.min.css" />
+    <link rel="stylesheet" href="__STATIC__/slick/slick.css">
+    <link rel="stylesheet" href="__STATIC__/slick/slick-theme.css">
+    <link rel="stylesheet" href="__STATIC__/magnific-popup/magnific-popup.css">
+    <link rel="stylesheet" href="__STATIC__/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__STATIC__/css/templatemo-style.css" />
+    <script src="__STATIC__/js/jquery-1.9.1.min.js"></script>
+    <script src="__STATIC__/slick/slick.min.js"></script>
+    <script src="__STATIC__/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="__STATIC__/js/jquery.singlePageNav.min.js"></script>
+    <script src="__STATIC__/js/bootstrap.min.js"></script>
+    <script src="__STATIC__/js/function.js"></script>
+
+
+
+</head>
+<body style="background-color: white;background-repeat: no-repeat;
+  height: 100vh;
+  min-height: 375px;
+  position: relative;">
+
+<div class="container" >
+    <div class="row ">
+
+<!--        <div class="col-8 d-none d-sm-block">
+            <img class="img-fluid mt-3" src="__STATIC__/img/the-town-bg-01.jpg">
+        </div>-->
+        <div class="col-lg-4"></div>
+
+        <div class="col-sm-12 col-lg-4 mt-3 mr-auto">
+            <h3>用户注册</h3></br>
+
+            <div class="col-12 text-right">
+                <span style="text-align: right">(*)为必填项</span>
+
+            </div>
+
+            <form role="form" class="form-inline mt-3" action="{:url('index/login/registcheck')}" method="post" >
+
+                <div class="form-group">
+                    <span class="col-12">姓名：(必须输入中文)</span>
+                    <input id="username_zh" type="text" class="form-control" onKeyUp="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" placeholder="" name="username_zh" required autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <span class="col-12">用户名：</span>
+                    <input id="username-en" type="text" class="form-control" placeholder="自动识别拼音" name="username">
+                </div>
+
+                <div class="form-group">
+                    <span class="col-12">密码：(*)</span>
+                    <input type="password" class="form-control" name="userpwd" id="userpwd" required>
+                </div>
+                <div class="form-group">
+                    <span class="col-12">重复密码：(*)</span>
+                    <input type="password" class="form-control" name="userpwd-re" id="userpwd-re" required>
+                </div>
+
+                <div id="passcheck" class="alert-danger"></div>
+
+                <div class="form-group">
+                    <span class="col-12">手机号码：(*)</span>
+                    <input type="phone" class="form-control" name="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <span class="col-12">邮箱：(*)</span>
+                    <input type="email" class="form-control" name="email" required>
+                </div>
+                <div class="form-group">
+                    <span class="col-12">所属单位：(*)</span>
+                    <select class="col-12 custom-select " name="danwei" required>
+                        <option selected>请选择...</option>
+                        <option>无优中心</option>
+                        <option>润建</option>
+                        <option>长实</option>
+                        <option>浙通服</option>
+                        <option>铁通-高铁</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <span class="col-12">验证码：(*)</span>
+                    <input type="text" class="form-control" name="code" required>
+                </div>
+                <div class="form-group col-12">{:captcha_img()}</div>
+
+                <div class="form-group">
+                    <button id="submit" type="submit" class="btn btn-secondary" >提交注册</button>
+                    <button type="reset" class="btn btn-secondary">重置</button>
+                </div>
+
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+</html>

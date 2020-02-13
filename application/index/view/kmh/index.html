@@ -1,0 +1,197 @@
+{include file="public/top" /}
+<link rel="stylesheet" href="__STATIC__/dist_bootstable/bootstrap-table.min.css">
+<link rel="stylesheet" href="__STATIC__/dist_bootstable/extensions/editable/bootstrap-editable.css">
+<link rel="stylesheet" href="__STATIC__/fontawesome-5.5/css/all.min.css" />
+
+<script src="__STATIC__/dist_bootstable/bootstrap-table.min.js"></script>
+<script src="__STATIC__/dist_bootstable/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="__STATIC__/dist_bootstable/extensions/editable/bootstrap-table-editable.min.js"></script>
+<script src="__STATIC__/dist_bootstable/extensions/export/bootstrap-table-export.min.js"></script>
+<script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+<script src="https://unpkg.com/tableexport.jquery.plugin/libs/jsPDF/jspdf.min.js"></script>
+<script src="https://unpkg.com/tableexport.jquery.plugin/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"></script>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 tm-section-pad-top " style="text-align: left">
+
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <button class="btn btn-light" data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseOne">
+                                搜索工单
+                            </button>
+                            <a class="btn btn-light ml-2" href="#"> 导出清单</a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <form class="mt-2" method="post" id="kmh_form">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label class="ml-3">问题小区名称：</label>
+                                        <input class="form-control ml-1" name="cellname" id="cellname">
+                                        <label class="ml-3">是否解决：</label>
+                                        <select class="custom-select ml-1" name="solve" id="solve">
+                                            <option selected></option>
+                                            <option value="未解决">未解决</option>
+                                            <option value="已解决">已解决</option>
+                                        </select>
+                                        <label class="ml-3">是否评估通过：</label>
+                                        <select class="custom-select ml-1" name="evaluate" id="evaluate">
+                                            <option selected></option>
+                                            <option value="是">是</option>
+                                            <option value="否">否</option>
+                                        </select>
+                                        <label class="ml-3">区域：</label>
+                                        <select class="custom-select ml-1" name="area" id="area">
+                                            <option selected></option>
+                                            <option value="禅城">禅城</option>
+                                            <option value="南海">南海</option>
+                                            <option value="顺德">顺德</option>
+                                            <option value="三水">三水</option>
+                                            <option value="高明">高明</option>
+                                        </select>
+                                        <a id="button" type="submit" class="btn btn-light ml-3" >搜索</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 " id="test">
+                <table class="table table-hover table-bordered" id="table"></table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+        $('#button').click(function () {
+            $('#table').bootstrapTable('destroy');
+            var formData = $("#kmh_form").serialize();
+            console.log(formData);
+            $.ajax({
+                method:"post",
+                dataType:"json",
+                url:"{:url('index/kmh/task_send')}",
+                data:formData,//这里data传递过去的是序列化以后的字符串
+                success:function(data){
+                    console.log(data);
+                    $('#table').bootstrapTable({
+                        data: data,
+                        search:true,
+                        //toolbar: '#toolbar',                //工具按钮用哪个容器
+                        striped: true,  //表格显示条纹，默认为false
+                        pagination: true, // 在表格底部显示分页组件，默认false
+                        pageList: [10, 20], // 设置页面可以显示的数据条数
+                        pageSize: 10, // 页面数据条数
+                        pageNumber: 1, // 首页页码
+                        sidePagination: 'client', // 设置为服务器端分页
+                        showRefresh:true,
+                        showColumns: true,
+                        height:500,
+                        sortable:true,
+                        showExport: true,
+                        exportTypes:['excel','txt'],  //导出文件类型
+                        exportDataType: "basic",
+                        exportOptions:{
+                            ignoreColumn: [0],  //忽略某一列的索引
+                            fileName: '开门红故障处理列表',  //文件名称设置
+                            worksheetName: 'sheet1',  //表格工作区名称
+                            tableName: '开门红故障处理列表',
+                            excelstyles: ['background-color', 'color', 'font-size', 'font-weight'],
+                        },
+                        queryParams: function (params) { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
+
+                            return {
+                                limit: params.limit, // 每页要显示的数据条数
+                                offset: params.offset, // 每页显示数据的开始行号
+                            }
+                        },
+                        columns: [
+                            {
+                                checkbox: true, // 显示一个勾选框
+                                align: 'center' // 居中显示
+                            },
+                            {
+                                field: 'task_id', // 返回json数据中的name
+                                title: '任务编号', // 表格表头显示文字
+                                align: 'left', // 左右居中
+                                valign: 'middle', // 上下居中
+                                sortable: true
+                            }, {
+                                field: 'cellname',
+                                title: '问题小区名',
+                                align: 'left',
+                                valign: 'middle',
+                                sortable: true
+                            },{
+                                field: 'task_solution',
+                                title: '详细解决方案',
+                                align: 'left',
+                                valign: 'middle'
+                            }, {
+                                field: 'solve_danwei',
+                                title: '解决单位',
+                                align: 'left',
+                                valign: 'middle'
+                            },{
+                                field:'wangge_wh24',
+                                title: '归属24个维护网格',
+                                align: 'left',
+                                valign: 'middle',
+                                sortable: true,
+                            },{
+                                field:'solve',
+                                title: '是否解决',
+                                align: 'left',
+                                valign: 'middle',
+                                sortable: true,
+                                formatter: function (value, row, index) {
+                                    if (value == "是") {
+                                        return "已处理";
+                                    } else
+                                        return "<a onclick='return confirm(\"是否确认已处理完成？\")' class='btn btn-danger' href=\"{:url('/index/admin/task_solve')}?taskid="+row.taskid+"\">请确认</a>";;
+
+                                }
+                            } ,{
+                                field: 'evaluate', // 返回json数据中的name
+                                title: '是否评估通过', // 表格表头显示文字
+                                align: 'left', // 左右居中
+                                valign: 'middle', // 上下居中
+                                sortable: true,
+                                formatter: function (value, row, index) {
+                                    if (value == "是") {
+                                        return "已通过";
+                                    } else if(row.solve=="是"){
+                                        return "<a onclick='return confirm(\"是否确认评估完成？\")' class='btn btn-danger' href=\"{:url('/index/admin/task_eval')}?taskid="+row.taskid+"\">请评估</a>";
+                                    }else return "待处理"
+
+                                }
+                            }
+                        ],
+                        onLoadSuccess: function(){  //加载成功时执行
+                            console.info("加载成功");
+                        },
+                        onLoadError: function(){  //加载失败时执行
+                            console.info("加载数据失败");
+                        }
+                    });
+                },
+                error:function (error) {
+                    alert('post失败')
+                }
+            });
+        })
+</script>
+
+
+{include file="public/bottom" /}
+

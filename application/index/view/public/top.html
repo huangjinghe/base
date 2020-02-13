@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="icon" href="__STATIC__/img/icon.png" >
+    <title>佛山移动基站信息上报</title>
+    <link rel="stylesheet" href="__STATIC__/fontawesome-5.5/css/all.min.css" />
+    <link rel="stylesheet" href="__STATIC__/slick/slick.css">
+    <link rel="stylesheet" href="__STATIC__/slick/slick-theme.css">
+    <link rel="stylesheet" href="__STATIC__/magnific-popup/magnific-popup.css">
+    <link rel="stylesheet" href="__STATIC__/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__STATIC__/css/templatemo-style.css" />
+
+    <link rel="stylesheet" href="__STATIC__/dist_datepicker/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="__STATIC__/dist_datepicker/css/bootstrap-datepicker.standalone.css">
+    <script src="__STATIC__/js/popper.min.js"></script>
+    <script src="__STATIC__/js/jquery-3.4.1.min.js"></script>
+    <script src="__STATIC__/js/bootstrap.min.js"></script>
+    <script src="__STATIC__/slick/slick.min.js"></script>
+    <script src="__STATIC__/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="__STATIC__/js/jquery.singlePageNav.min.js"></script>
+    <script src="__STATIC__/js/popper.min.js"></script>
+    <script src="__STATIC__/dist_datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="__STATIC__/dist_datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+
+</head>
+<body>
+<!-- Hero section -->
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md tm-navbar " id="tmNav">
+    <div class="container">
+        <div class="tm-next">
+            <a href="{:url('index/index/index')}" class="navbar-brand">佛山移动基站信息上报</a>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars navbar-toggler-icon"></i>
+        </button>
+
+        <div class="collapse navbar-collapse mt-3" id="navbarSupportedContent">
+            <ul class="navbar-nav m-auto align-self-center">
+                <li class="nav-item">
+                    <form action="{:url('index/index/showlist')}" method="get">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="basecheck" name="basename" placeholder="请输入物理站点名称">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <button class="btn btn-info btn-search" type="submit">查找</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link tm-nav-link" href="index/index/index/#introduction">公告</a>
+                </li>
+                <li >
+                    <a class="nav-link tm-nav-link" href="{:url('index/index/showlist')}" >隐患上报</a>
+                </li>
+                <li >
+                    <a class="nav-link tm-nav-link" href="{:url('index/kmh/index')}" >开门红</a>
+                </li>
+
+
+
+
+                <div class="dropdown">
+                    <a  class="nav-link tm-nav-link dropdown-toggle" data-toggle="dropdown">
+                        用户管理
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">用户名：{$username_zh}</a>
+                        <a class="dropdown-item" href="{:url('index/login/userprofile')}?username={$username}">用户信息</a>
+                        <a class="dropdown-item"href="{:url('index/login/userpwd')}?username={$username}">密码修改</a>
+                        <a class="dropdown-item" href="{:url('index/login/loginreset')}">退出登陆</a>
+
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+

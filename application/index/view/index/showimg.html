@@ -1,0 +1,46 @@
+{include file="public/top" /}
+<script src="__STATIC__/js/function.js"></script>
+
+<section id="work" class="tm-section-pad-top">
+    <div class="container tm-container-gallery">
+        <div class="row">
+            <div class="text-center col-12">
+                <h2 class="tm-text-primary tm-section-title mb-4">{$basename}</h2>
+                <p class="mx-auto tm-work-description">
+                    共上传{$img_count}张现场照片
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="mx-auto tm-gallery-container">
+                    <div class="grid tm-gallery">
+
+                        {foreach img_data as $vo}
+                        <a href="{$vo.img_location}">
+                            <figure class="effect-honey tm-gallery-item">
+                                <img src="{$vo.img_location}" alt="Image" class="img-fluid">
+                                <figcaption>
+                                    <h2><i>{$vo.img_miaoshu}</i></h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+
+                        {/foreach}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align:center">
+            <button class="btn btn-light" ><a href="{:url('index/index/postinfo')}?basename={$basename}">上报隐患</a></button>
+            <button class="btn btn-light" onclick="javascript:history.back(-1)">返回</button>
+        </div>
+    </div>
+</section>
+
+
+
+
+{include file="public/bottom" /}

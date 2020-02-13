@@ -1,0 +1,115 @@
+{include file="public/admin-top" /}
+<div id="toolbar"></div>
+
+<table id="table">
+
+</table>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#table').bootstrapTable('destroy');
+        $("#table").bootstrapTable({
+            method: "get",
+            url: "{:url('index/admin/picture_send')}",
+            search:true,
+            toolbar: '#toolbar',                //工具按钮用哪个容器
+            striped: true,  //表格显示条纹，默认为false
+            pagination: true, // 在表格底部显示分页组件，默认false
+            pageList: [10, 20], // 设置页面可以显示的数据条数
+            pageSize: 10, // 页面数据条数
+            pageNumber: 1, // 首页页码
+            sidePagination: 'client', // 设置为服务器端分页
+            showRefresh:false,
+            showColumns: true,
+            height:500,
+            sortable:true,
+            showExport: true,
+            exportTypes:['excel','txt'],  //导出文件类型
+            exportDataType: "basic",
+            exportOptions:{
+                ignoreColumn: [0],  //忽略某一列的索引
+                fileName: '佛山移动基站信息上报系统图片列表',  //文件名称设置
+                worksheetName: 'sheet1',  //表格工作区名称
+                tableName: '佛山移动基站信息上报系统图片列表',
+                excelstyles: ['background-color', 'color', 'font-size', 'font-weight'],
+            },
+            queryParams: function (params) { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
+
+                return {
+                    limit: params.limit, // 每页要显示的数据条数
+                    offset: params.offset, // 每页显示数据的开始行号
+                }
+            },
+            columns: [
+                {
+                    checkbox: true, // 显示一个勾选框
+                    align: 'center' // 居中显示
+                }, {
+                    field: 'img_id', // 返回json数据中的name
+                    title: '图片编号', // 表格表头显示文字
+                    align: 'left', // 左右居中
+                    valign: 'middle' // 上下居中
+                }, {
+                    field: 'img_name',
+                    title: '图片名',
+                    align: 'left',
+                    valign: 'middle',
+                    width:'10%'
+                }, {
+                    field: 'img_basename',
+                    title: '所属基站名',
+                    align: 'left',
+                    valign: 'middle'
+                },{
+                    field:'img_miaoshu',
+                    title: '图片描述',
+                    align: 'left',
+                    valign: 'middle'
+
+                },{
+                    field:'img_uploader',
+                    title: '上传人',
+                    align: 'left',
+                    valign: 'middle',
+
+                },{
+                    field:'img_uploadtime',
+                    title: '上传时间',
+                    align: 'left',
+                    valign: 'middle'
+
+                }, {
+                    field: 'img_location',
+                    title: '查看',
+                    align: 'left',
+                    valign: 'middle',
+                    formatter: function (value, row, index) {
+                        return '<a class="btn btn-primary" href='+value+'>查看</a>\t'
+                    }
+                }, {
+                    field: 'img_id',
+                    title: '操作',
+                    align: 'left',
+                    valign: 'middle',
+                    width:'10%',
+                    formatter: function (value, row, index) {
+                        var button= "<a class='btn btn-danger' href=\"{:url('/index/admin/pic_del')}?img_id="+value+"\">删除</a>";
+                        return button;
+                    }
+                }
+            ],
+            onLoadSuccess: function(){  //加载成功时执行
+                console.info("加载成功");
+            },
+            onLoadError: function(){  //加载失败时执行
+                console.info("加载数据失败");
+            }
+        });
+        //其他JS
+
+    })
+</script>
+
+
+{include file="public/admin-bottom" /}

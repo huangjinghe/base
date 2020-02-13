@@ -1,0 +1,260 @@
+{include file="public/top" /}
+<script src="__STATIC__/js/function.js"></script>
+
+<div class="row">
+    <div class="col-md-12 tm-section-pad-top " >
+
+        <table class="table table-bordered text-left" >
+
+            {foreach showbase as $vo}
+
+            <tr>
+                <th>站点编号</th>
+                <td>{$vo.tp_id}</td>
+            </tr>
+            <tr>
+                <th>站点名称</th>
+                <td>{$vo.tp_basename}</td>
+            </tr>
+            <tr><th>维护单位</th>
+                <td >{$vo.tp_company}</td>
+            </tr>
+            <tr><th>结算类型</th>
+                <td >{$vo.tp_basetype}</td>
+            </tr>
+        </table>
+        <!--外告可用性-->
+        <div class="panel-group" id="alarm">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class=" w-100 panel-title border rounded-lg fa fa-barcode">
+                        <a class="btn">外告可用性</a>
+                        <a class="btn btn-default float-right" aria-label="Left Align" data-toggle="collapse" data-parent="#alarm"
+                                href="#waigao">
+                            <span class="fa fa-angle-double-down" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
+                <div id="waigao" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <table class="table table-bordered">
+                            <tr><th>是否有外告系统</th>
+                                <td >{$vo.tp_alarmexist }</td>
+                            </tr>
+                            <tr><th>外告是否正常上报</th>
+                                <td >{$vo.tp_alarmworking }</td>
+                            </tr>
+                            <tr><th>外告接入设备逻辑站名</th>
+                                <td >{$vo.tp_alarmbase}</td>
+                            </tr>
+
+                            <tr><th>最近一次外告上报日期</th>
+                                <td >{$vo.tp_alarm_send_date}</td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <!--空调可用性-->
+        <div class="panel-group" id="aircon">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="w-100 panel-title border rounded-lg fa fa-barcode">
+                        <a class="btn">空调可用性</a>
+                        <a class="btn btn-default float-right" aria-label="Left Align" data-toggle="collapse" data-parent="#kongtiao"
+                           href="#kongtiao">
+                            <span class="fa fa-angle-double-down" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
+                <div id="kongtiao" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <table class="table table-bordered">
+                            <tr><th>空调是否正常</th>
+                                <td >{$vo.tp_aircon }</td>
+                            </tr>
+                            <tr><th>空调是否超6年</th>
+                                <td >{$vo.aircon_limit }</td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <!--动力可靠性-->
+        <div class="panel-group" id="dongli">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="w-100 panel-title border rounded-lg fa fa-barcode">
+                        <a class="btn">动力可靠性</a>
+                        <a class="btn btn-default float-right" aria-label="Left Align" data-toggle="collapse" data-parent="#dongli"
+                           href="#eletric">
+                            <span class="fa fa-angle-double-down" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
+                <div id="eletric" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <table class="table table-bordered">
+                            <tr><th>外电是否正常</th>
+                                <td >{$vo.tp_eletric }</td>
+                            </tr>
+                            <tr><th>是否可以发电</th>
+                                <td >{$vo.power_generation}</td>
+                            </tr>
+                            <tr><th>电源负载是否超80%</th>
+                                <td >{$vo.power_module}</td>
+                            </tr>
+                            <tr><th>电池是否可续航两小时以上</th>
+                                <td >{$vo.tp_xuhang }</td>
+                            </tr>
+                            <tr><th>电池是否超8年</th>
+                                <td >{$vo.xuhang_limit}</td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <!--传输配套合规性-->
+        <div class="panel-group" id="chuanshu">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="w-100 panel-title border  fa fa-barcode">
+                        <a class="btn">传输配套合规性</a>
+                        <a class="btn btn-default float-right" aria-label="Left Align" data-toggle="collapse" data-parent="#chuanshu"
+                           href="#tp_olt">
+                            <span class="fa fa-angle-double-down" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
+                <div id="tp_olt" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <table class="table table-bordered">
+                            <tr><th>是否OLT共址</th>
+                                <td >{$vo.tp_olt}</td>
+                            </tr>
+                            <tr><th>传输设备(OLT/PTN/SDH)是否接24V电源柜</th>
+                                <td >{$vo.tp_chuanshu }</td>
+                            </tr>
+                            <tr><th>是否具备二次下电</th>
+                                <td >{$vo.tp_xiadian }</td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <br>
+        <table class="table table-bordered">
+            <tr><th>问题具体描述</th>
+                <td >{$vo.tp_miaoshu }</td>
+            </tr>
+            <tr><th>专项标签</th>
+                <td >{$vo.tp_beizhu}</td>
+            </tr>
+            <tr><th>隐患是否已解决</th>
+                <td>{$vo.end}</td>
+            </tr>
+            <tr><th>上报记录</th>
+                <td>{$vo.updateuser}<br>{$vo.updatetime}</td>
+            </tr>
+        </table>
+
+
+            {/foreach}
+
+
+        <table class="table table-bordered text-nowrap  text-center">
+            <tr>
+                <td><a href="{:url('index/index/showimg')}?basename={$vo.tp_basename}">点击查看现场照片</a></td>
+            </tr>
+        </table>
+
+        <div style="text-align:center">
+            <button class="btn btn-light" data-toggle="modal" data-target="#exampleModal">拍照上传</button>
+
+            <button class="btn btn-light" ><a href="{:url('index/index/postinfo')}?basename={$vo.tp_basename}">上报隐患</a></button>
+            <button class="btn btn-light" onclick="javascript:history.back(-1)">返回</button>
+        </div>
+
+
+    </div>
+
+    <div class="col-sm-12">
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">拍照上传</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center col-4 col-sm-12">
+                            <div id="photo"></div><!--图片预览-->
+                            <!--<div > <img id="canvas" src=""></div>-->
+                        </div>
+                        <form id="form" method="post" enctype="multipart/form-data">
+                            <div class="input-group">
+                                <div class="custom-file" >
+                                    <input id="img" name="img"  type="file" multiple="multiple" class="custom-file-input" accept="image/*"   aria-describedby="inputGroupFileAddon04" >
+                                    <label name="pleasepic" id="pleasepic" class="custom-file-label" for="img">请选择图片或拍照</label>
+                            </div>
+
+
+                                <div class="input-group mt-2">
+                                    <div>
+                                        <input  name="img_miaoshu" type="text" required class="form-control" placeholder="请描述一下">
+                                        <div id="alert"></div>
+
+                                    </div>
+                                </div>
+
+                                <div hidden>
+                                    {foreach showbase as $val}
+                                        <input name="img_uploader" value="{$_SESSION['username']}">
+                                        <input name="img_basename" value="{$val.tp_basename}">
+                                    <input id="url" value="{:url('index/index/showimg')}?basename={$vo.tp_basename}">
+                                    {/foreach}
+                                </div>
+                                <!--<div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">上传</button>
+                                </div>-->
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                <button id="img_upload" type="button" class="btn btn-primary" >上传</button>
+                            </div>
+
+                        </form>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+
+
+{include file="public/bottom" /}

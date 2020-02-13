@@ -1,0 +1,70 @@
+{include file="public/top" /}
+
+<div class="container " >
+    <div class="row ">
+        <div class="col-md-12 tm-section-pad-top " style="text-align: left">
+
+            <div class="col-12 table-bordered">
+                <form class="mt-2" action="{:url('index/index/searchlist')}" method="get">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <label class="ml-3">物理站点名称：</label>
+                            <input class="form-control ml-1" name="basename">
+                            <label class="ml-3">隐患是否解决：</label>
+                            <select class="form-control ml-1" name="end">
+                                <option></option>
+                                <option value="已解决">已解决</option>
+                                <option value="未解决">未解决</option>
+                            </select>
+                            <label class="ml-3" >专项标签：</label>
+                            <select class="custom-select ml-1" name="beizhu">
+                                <option></option>
+                                <option value="重要机房隐患整治">重要机房隐患整治</option>
+                            </select>
+                            <input type="hidden" name="TOKEN" value="{:session('TOKEN')}">
+                            <button class="btn btn-light ml-3" type="submit">搜索</button>
+                            <a class="btn btn-light ml-2" href="{:url('index/phptoexcel/index')}"> 导出全部</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            </br>
+
+
+            <table class="table table-bordered" >
+                <tr>
+                    <th>序号</th>
+                    <th>站点名称</th>
+                    <th>维护单位</th>
+                    <th>专项标签</th>
+                    <th>隐患是否解决</th>
+                </tr>
+
+                {foreach list as $vo}
+                <tr>
+                    <td>{$vo.tp_id}</td>
+                    <td><a href="{:url('index/index/showdetail')}?basename={$vo.tp_basename}">{$vo.tp_basename}</a></td>
+                    <td >{$vo.tp_company}</td>
+                    <td >{$vo.tp_beizhu}</td>
+                    <td>{$vo.end}</td>
+                </tr>
+                {/foreach}
+            </table>
+            <div class="col align-self-center float-right" >
+                    {$page}
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+</div>
+
+
+
+
+
+{include file="public/bottom" /}
