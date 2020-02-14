@@ -11,7 +11,7 @@ class Initial extends Controller
         session_start();
 
         if(!isset($_SESSION['username'])){
-            $this->error('请登陆','index/login/index');
+            $this->redirect('index/login/index');
         }else {
             $username=$_SESSION['username'];
             $username_zh=$_SESSION['username_zh'];
