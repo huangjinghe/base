@@ -9,17 +9,31 @@
             {foreach showbase as $vo}
 
             <tr>
-                <th>站点编号</th>
-                <td>{$vo.tp_id}</td>
+                <td colspan="2" align="left">
+                    <button class="btn btn-link" id="demand" >配套隐患排查要求</button><i class="fa fa-question-circle" aria-hidden="true"></i>
+                    <div id="warning" class="alert alert-warning">
+                        <button class="close" type="button" data-dismiss="alert" >
+                            <span>×</span>
+                        </button>
+                        <p>检查内容与标准：<br>
+                            1、外告可用性：检查市电、高温等重要外告是否可正常及时触发，且顺利派单告警通知短信至维护专员。<br>
+                            2、发电可达性:检查机房是否具备应急发电所需的硬件及物业条件。<br>
+                            3、电源可靠性：检查机房直流电源系统负载率（机房设备总负载/总电源柜配置容量）是否不超80%，整流模块数是否满足n+1冗余要求（n为满足负载容量最少模块数）。<br>
+                            4、备电可靠性：检查测试机房内蓄电池续航时长是否大于2小时，蓄电池使用时长是否超过规定报废年限（8年）。<br>
+                            5、空调可用性：检查机房内空调是否正常制冷，空调使用时长是否超过规定报废年限（6年）。<br>
+                            6、其他：传输设备共机房的站点，检查传输设备(含OLT/PTN/SDH)是否存在接入24V电源柜情况，传输设备是否完成二次下电电源配置。<br>
+                        </p>
+                    </div>
+                </td>
             </tr>
             <tr>
-                <th>站点名称</th>
-                <td>{$vo.tp_basename}</td>
+                <th>站点名称：<small>{$vo.tp_basename}</small></th>
+                <th>站点编号：<small>[{$vo.tp_id}]</small></th>
             </tr>
-            <tr><th>维护单位</th>
+            <tr><th>维护单位:</th>
                 <td >{$vo.tp_company}</td>
             </tr>
-            <tr><th>结算类型</th>
+            <tr><th>结算类型:</th>
                 <td >{$vo.tp_basetype}</td>
             </tr>
         </table>
@@ -38,7 +52,7 @@
                 <div id="waigao" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <table class="table table-bordered">
-                            <tr><th>是否有外告系统</th>
+                            <tr><th class="w-50">是否有外告系统</th>
                                 <td >{$vo.tp_alarmexist }</td>
                             </tr>
                             <tr><th>外告是否正常上报</th>
@@ -73,7 +87,7 @@
                 <div id="kongtiao" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <table class="table table-bordered">
-                            <tr><th>空调是否正常</th>
+                            <tr><th class="w-50">空调是否正常</th>
                                 <td >{$vo.tp_aircon }</td>
                             </tr>
                             <tr><th>空调是否超6年</th>
@@ -101,7 +115,7 @@
                 <div id="eletric" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <table class="table table-bordered">
-                            <tr><th>外电是否正常</th>
+                            <tr><th class="w-50">外电是否正常</th>
                                 <td >{$vo.tp_eletric }</td>
                             </tr>
                             <tr><th>是否可以发电</th>
@@ -138,7 +152,7 @@
                 <div id="tp_olt" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <table class="table table-bordered">
-                            <tr><th>是否OLT共址</th>
+                            <tr><th class="w-50">是否OLT共址</th>
                                 <td >{$vo.tp_olt}</td>
                             </tr>
                             <tr><th>传输设备(OLT/PTN/SDH)是否接24V电源柜</th>
