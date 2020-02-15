@@ -9,24 +9,6 @@
             {foreach showbase as $vo}
 
             <tr>
-                <td colspan="2" align="left">
-                    <button class="btn btn-link" id="demand" >配套隐患排查要求</button><i class="fa fa-question-circle" aria-hidden="true"></i>
-                    <div id="warning" class="alert alert-warning">
-                        <button class="close" type="button" data-dismiss="alert" >
-                            <span>×</span>
-                        </button>
-                        <p>检查内容与标准：<br>
-                            1、外告可用性：检查市电、高温等重要外告是否可正常及时触发，且顺利派单告警通知短信至维护专员。<br>
-                            2、发电可达性:检查机房是否具备应急发电所需的硬件及物业条件。<br>
-                            3、电源可靠性：检查机房直流电源系统负载率（机房设备总负载/总电源柜配置容量）是否不超80%，整流模块数是否满足n+1冗余要求（n为满足负载容量最少模块数）。<br>
-                            4、备电可靠性：检查测试机房内蓄电池续航时长是否大于2小时，蓄电池使用时长是否超过规定报废年限（8年）。<br>
-                            5、空调可用性：检查机房内空调是否正常制冷，空调使用时长是否超过规定报废年限（6年）。<br>
-                            6、其他：传输设备共机房的站点，检查传输设备(含OLT/PTN/SDH)是否存在接入24V电源柜情况，传输设备是否完成二次下电电源配置。<br>
-                        </p>
-                    </div>
-                </td>
-            </tr>
-            <tr>
                 <th>站点名称：<small>{$vo.tp_basename}</small></th>
                 <th>站点编号：<small>[{$vo.tp_id}]</small></th>
             </tr>
@@ -201,6 +183,23 @@
             <button class="btn btn-light" ><a href="{:url('index/index/postinfo')}?basename={$vo.tp_basename}">上报隐患</a></button>
             <button class="btn btn-light" onclick="javascript:history.back(-1)">返回</button>
         </div>
+        <tr>
+            <td colspan="2" align="left">
+                <div id="warning" class="alert alert-warning">
+                    <button class="close" type="button" data-dismiss="alert" >
+                        <span>×</span>
+                    </button>
+                    <p>检查内容与标准：<br>
+                        1、外告可用性：检查市电、高温等重要外告是否可正常及时触发，且顺利派单告警通知短信至维护专员。<br>
+                        2、发电可达性:检查机房是否具备应急发电所需的硬件及物业条件。<br>
+                        3、电源可靠性：检查机房直流电源系统负载率（机房设备总负载/总电源柜配置容量）是否不超80%，整流模块数是否满足n+1冗余要求（n为满足负载容量最少模块数）。<br>
+                        4、备电可靠性：检查测试机房内蓄电池续航时长是否大于2小时，蓄电池使用时长是否超过规定报废年限（8年）。<br>
+                        5、空调可用性：检查机房内空调是否正常制冷，空调使用时长是否超过规定报废年限（6年）。<br>
+                        6、传输配套合规性：传输设备共机房的站点，检查传输设备(含OLT/PTN/SDH)是否存在接入24V电源柜情况，传输设备是否完成二次下电电源配置。<br>
+                    </p>
+                </div>
+            </td>
+        </tr>
 
 
     </div>

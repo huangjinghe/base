@@ -1,0 +1,27 @@
+{include file="public/top" /}
+<script src="__STATIC__/js/function.js"></script>
+
+<div class="container">
+    <div class="row" style="padding-top: 100px">
+        <div class="col-12">
+            <form class="mt-2" action="{:url('index/nr/ptgz')}" method="post">
+                <div class="form-group">
+                    <div class="form-inline">
+                        <label class="ml-3">物理站点名称：</label>
+                        <input class="form-control ml-1" name="basename">
+                        <label class="ml-3">会审是否通过：</label>
+                        <select class="form-control ml-1" name="end">
+                            <option></option>
+                            <option value="已解决">会审通过</option>
+                            <option value="未解决">未通过</option>
+                        </select>
+                        <button class="btn btn-light ml-3" type="submit">搜索</button>
+                        <a class="btn btn-light ml-2" href="{:url('index/phptoexcel/index')}"> 导出全部</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        </br>
+    </div>
+</div>
+{include file="public/bottom" /}
