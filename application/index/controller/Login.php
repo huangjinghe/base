@@ -79,7 +79,7 @@ class Login extends Controller
                     $user_login->save([
                         'logintime'  => $logintime,
                     ],['username' => $username]);
-                    return $this->success('普通用户登陆成功','index/index/index');
+                    return $this->success('普通用户登陆成功','index/index/index',2,1);
             } else if ($userinfo['userpwd']==$password && $userinfo['quanxian']==1){
                 $_SESSION['username']=$username;
                 $_SESSION['username_zh']=$username_zh;
@@ -91,7 +91,7 @@ class Login extends Controller
                 $user_login->save([
                     'logintime'  => $logintime,
                 ],['username' => $username]);
-                return $this->success('您是管理员，跳转后台管理','index/admin/index');
+                return $this->success('您是管理员，跳转后台管理','index/admin/index',2,1);
             }
 
             //var_dump($userinfo);

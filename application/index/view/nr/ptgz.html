@@ -1,27 +1,86 @@
 {include file="public/top" /}
+<link rel="stylesheet" href="__STATIC__/css/style.css">
 <script src="__STATIC__/js/function.js"></script>
 
 <div class="container">
     <div class="row" style="padding-top: 100px">
-        <div class="col-12">
-            <form class="mt-2" action="{:url('index/nr/ptgz')}" method="post">
+        <div class="col-12 border-bottom">
+            <form class="mt-2" action="{:url('index/nr/ptgz')}" method="get">
                 <div class="form-group">
                     <div class="form-inline">
                         <label class="ml-3">物理站点名称：</label>
-                        <input class="form-control ml-1" name="basename">
-                        <label class="ml-3">会审是否通过：</label>
-                        <select class="form-control ml-1" name="end">
-                            <option></option>
-                            <option value="已解决">会审通过</option>
-                            <option value="未解决">未通过</option>
-                        </select>
-                        <button class="btn btn-light ml-3" type="submit">搜索</button>
-                        <a class="btn btn-light ml-2" href="{:url('index/phptoexcel/index')}"> 导出全部</a>
+                        <input class="form-control ml-1" name="room_name">
+                        <button class="btn btn-light mt-2" type="submit">查询会审结果</button>
                     </div>
                 </div>
             </form>
         </div>
         </br>
+
+        <div class="col-md-6">
+            <div class="panel panel-warning mt-1">
+                <div class="panel-heading border-bottom">
+                    <span >查询结果(点击结果查看具体方案)</span>
+
+                </div>
+
+                <div class="panel-body">
+                    <div class="list-group">
+                        {foreach res as $vo}
+                        <span class="list-group-item">
+                            {$vo.room_name}
+                            <br><a href="#" data-toggle="modal" data-target="#roomid_{$vo.id}">审核结果：{$vo.eval_result}</a>
+                        </span>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="roomid_{$vo.id}" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">{$vo.room_name}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-bordered">
+                                            <tr>
+                                                <th>配改分工：</th><td>{$vo.fengong}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>配改方式：</th><td>{$vo.fangshi}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>新增电源柜类型：</th><td>{$vo.power_type}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>新增电池容量（AH）：</th><td>{$vo.power_contain}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>新增电池组数：</th><td>{$vo.power_num}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>审核结果：</th><td>{$vo.eval_result}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/foreach}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
     </div>
+    <br>
+    {$page}
 </div>
 {include file="public/bottom" /}
