@@ -91,6 +91,16 @@ class Admin extends InitialAdmin
         ];
         return json($result);
     }
+
+    public function pic_del(){
+        $img_id=input('img_id');
+        $user_del= Base::name('baseimg')-> where('img_id',$img_id)->delete();
+        if ($user_del) {
+            return $this->success('已删除');
+        }else return $this->error('删除失败');
+
+    }
+
     public function user_del(){
         $userid=input('userid');
         $user_del= Base::name('user')-> where('userid',$userid)->delete();
