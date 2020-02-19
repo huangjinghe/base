@@ -31,21 +31,22 @@ class Index extends Initial
         return $this->fetch();
     }
     public function searchlist(){
-        $basename=Request::instance()->get('basename');
-        $end=Request::instance()->get('end');
-        $beizhu=Request::instance()->get('beizhu');
-        $base=new Base();
-        if($beizhu == null){
-            $beizhu_new='null';
-            $searchlist=$base->where('tp_basename','like','%'.$basename.'%')
-                ->where('end','like','%'.$end.'%')
-                ->paginate(10,false,['query'=>request()->param()]);
-        }else{
-            $searchlist=$base->where('tp_basename','like','%'.$basename.'%')
-                ->where('end','like','%'.$end.'%')
-                ->where('tp_beizhu','like','%'.$beizhu.'%')
-                ->paginate(10,false,['query'=>request()->param()]);
+
+        $map['tp_basename'] = ['like','%'.input('basename').'%'];
+
+        if(!empty(input('end'))){
+            $map['end'] = ['like','%'.input('end').'%'];
         }
+        if(!empty(input('beizhu'))){
+            $map['tp_beizhu'] = ['like','%'.input('beizhu').'%'];
+        }
+        if(!empty(input('tp_company'))){
+            $map['tp_company'] = ['like','%'.input('tp_company').'%'];
+        }
+
+
+        $base=new Base();
+        $searchlist=$base->where($map)->paginate(10,false,['query'=>request()->param()]);
 
         $page=$searchlist->render();
         $this->assign('page',$page);

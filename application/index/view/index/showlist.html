@@ -4,7 +4,7 @@
     <div class="row ">
         <div class="col-md-12 tm-section-pad-top " style="text-align: left">
 
-            <div class="col-12 table-bordered">
+            <div class="col-12">
                 <form class="mt-2" action="{:url('index/index/searchlist')}" method="get">
                     <div class="form-group">
                         <div class="form-inline">
@@ -16,12 +16,19 @@
                                 <option value="已解决">已解决</option>
                                 <option value="未解决">未解决</option>
                             </select>
+                            <label class="ml-3" >维护单位：</label>
+                            <select class="custom-select ml-1" name="tp_company">
+                                <option value=""></option>
+                                <option value="润建">润建</option>
+                                <option value="长实">长实</option>
+                                <option value="浙通服">浙通服</option>
+                                <option value="铁通-高铁">铁通-高铁</option>
+                            </select>
                             <label class="ml-3" >专项标签：</label>
                             <select class="custom-select ml-1" name="beizhu">
                                 <option></option>
                                 <option value="重要机房隐患整治">重要机房隐患整治</option>
                             </select>
-                            <input type="hidden" name="TOKEN" value="{:session('TOKEN')}">
                             <button class="btn btn-light ml-3" type="submit">搜索</button>
                             <a class="btn btn-light ml-2" href="{:url('index/phptoexcel/index')}"> 导出全部</a>
                         </div>
@@ -50,8 +57,8 @@
                 </tr>
                 {/foreach}
             </table>
-            <div class="col align-self-center float-right" >
-                    {$page}
+            <div class="col align-self-center" >
+                {$page}
             </div>
         </div>
 
