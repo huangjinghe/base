@@ -145,7 +145,7 @@ class Login extends Controller
 
         $subject=$_POST['username_zh'].'（'.$_POST['danwei'].'）'.'申请用户注册，请审批';
 
-        $body=$_POST['username_zh'].'申请用户注册，请点击链接审批</br><a href="http://106.13.32.74/base/public/admin/index/index">http://106.13.32.74/base/public/admin/index/index</a></br>';
+        $body=$_POST['username_zh'].'申请用户注册，请点击链接审批</br><a href="https://www.gmcc-fs.xyz/base/public/index/admin/userlist">http://106.13.32.74/base/public/admin/index/index</a></br>';
 
         if($email->mailsend($subject,$body)){
             echo '已邮件通知管理员';

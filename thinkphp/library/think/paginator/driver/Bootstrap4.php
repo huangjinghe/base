@@ -16,7 +16,7 @@ class Bootstrap4 extends Paginator
 
     public $rollPage=5;//分页栏每页显示的页数
     
-    public $showPage=12;//总页数超过多少条时显示的首页末页
+    public $showPage=5;//总页数超过多少条时显示的首页末页
     /**
      * 上一页按钮
      * @param string $text
@@ -51,7 +51,11 @@ class Bootstrap4 extends Paginator
 
         return $this->getPageLinkWrapper($url, $text);
     }
-    
+    //统计信息
+    protected function info(){
+        return "<p class='pageRemark'>共<b>" . $this->lastPage .
+            "</b>页<b>" . $this->total . "</b>个站点</p>";
+    }
     /**
      * 首页按钮
      * @param string $text
@@ -144,7 +148,8 @@ class Bootstrap4 extends Paginator
                 return sprintf(
                     '<div class="dataTables_paginate paging_simple_numbers"><ul class="pager">%s %s</ul></div>',
                     $this->getPreviousButton(),
-                    $this->getNextButton()
+                    $this->getNextButton(),
+                    $this->info()
                 );
             } else {
                 return sprintf(
@@ -153,7 +158,8 @@ class Bootstrap4 extends Paginator
                     $this->getPreviousButton(),
                     $this->getLinks(),
                     $this->getNextButton(),
-                    $this->getLastButton()
+                    $this->getLastButton(),
+                    $this->info()
                 );
             }
         }
