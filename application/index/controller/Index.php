@@ -122,24 +122,15 @@ class Index extends Initial
 					'.$_POST['tp_basename'].'
 				</td>
 			</tr>
-		
-			<tr>
-				<th style="vertical-align:top;border:2px solid #DEE2E6;">
-					外告接入设备逻辑站名
-				</th>
-				<td style="vertical-align:top;border:2px solid #DEE2E6;">
-					'.$_POST['tp_alarmexist'].'
-				</td>
-			</tr>
-			<tr>
-				<th style="vertical-align:top;border:2px solid #DEE2E6;">
-					是否有外告系统
-				</th>
-				<td style="vertical-align:top;border:2px solid #DEE2E6;">
-					'.$_POST['tp_alarmbase'].'
-				</td>
-			</tr>
-			<tr>
+            <tr>
+                    <th style="vertical-align:top;border:2px solid #DEE2E6;">
+                        是否有外告系统
+                    </th>
+                    <td style="vertical-align:top;border:2px solid #DEE2E6;">
+                        '.$_POST['tp_alarm_exist'].'
+                    </td>
+            </tr>
+            <tr>
 				<th style="vertical-align:top;border:2px solid #DEE2E6;">
 					外告是否正常上报
 				</th>
@@ -147,6 +138,16 @@ class Index extends Initial
 					'.$_POST['tp_alarmworking'].'
 				</td>
 			</tr>
+			<tr>
+				<th style="vertical-align:top;border:2px solid #DEE2E6;">
+					外告接入设备逻辑站名
+				</th>
+				<td style="vertical-align:top;border:2px solid #DEE2E6;">
+					'.$_POST['tp_alarmbase'].'
+				</td>
+			</tr>
+			
+			
 			<tr>
 				<th style="vertical-align:top;border:2px solid #DEE2E6;">
 					最近一次外告上报日期
